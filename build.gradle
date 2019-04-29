@@ -1,0 +1,58 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "https://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+apply plugin: 'maven'
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+
+version = "1.0"
+group = "me.dmillerw.flow" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "FlowUI"
+
+sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+minecraft {
+    version = "1.12.2-14.23.5.2836"
+    runDir = "run"
+    mappings = "snapshot_20171003"
+}
+
+dependencies {}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+
+        repository(url: 'http://maven.dmillerw.me/repository/internal') {
+            authentication(userName: project.property('gradle.username'), password: project.property('gradle.password'))
+        }
+
+        pom.version = version
+        pom.artifactId = archivesBaseName
+        pom.groupId = "me.dmillerw.flow"
+    }
+}
