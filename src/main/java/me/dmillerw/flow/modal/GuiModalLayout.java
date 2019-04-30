@@ -3,7 +3,7 @@ package me.dmillerw.flow.modal;
 import me.dmillerw.flow.Insets;
 import me.dmillerw.flow.Layout;
 import me.dmillerw.flow.Point;
-import me.dmillerw.flow.widgets.impl.NumberPicker;
+import me.dmillerw.flow.widgets.impl.Rectangle;
 import me.dmillerw.flow.widgets.impl.layout.LinearLayout;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
@@ -38,12 +38,11 @@ public class GuiModalLayout extends GuiModal {
 //                        .buildWidget()).buildWidget());
 
         layout = Layout.shrinkToFit(this, LinearLayout.buider()
-                .orientation(LinearLayout.Orientation.HORIZONTAL)
-                .padding(Insets.all(5))
-                .child(new NumberPicker(""))
-                .buildWidget());
+                        .orientation(LinearLayout.Orientation.HORIZONTAL)
+                        .padding(Insets.all(5))
+                        .child(Rectangle.builder().height(100).width(100).borderStyle(Rectangle.BorderStyle.INSET).color(0x000000).buildWidget()).buildWidget());
 
-        setGuiDimensions(layout.getLayoutDimensions().getWidth(), layout.getLayoutDimensions().getHeight());
+                setGuiDimensions(layout.getLayoutDimensions().getWidth(), layout.getLayoutDimensions().getHeight());
 
         layout.setLayoutPosition(new Point(guiLeft, guiTop));
 
@@ -66,10 +65,10 @@ public class GuiModalLayout extends GuiModal {
 
 //        layout = Layout.fromGui(this, LinearLayout.buider()
 //        .orientation(LinearLayout.Orientation.VERTICAL)
-//        .child(new DebugRect(-1, -1))
-//        .child(new DebugRect(-1, -1))
-//        .child(new DebugRect(-1, -1))
-//        .child(new DebugRect(-1, -1))
+//        .child(new Rectangle(-1, -1))
+//        .child(new Rectangle(-1, -1))
+//        .child(new Rectangle(-1, -1))
+//        .child(new Rectangle(-1, -1))
 //        .buildWidget());
     }
 

@@ -6,10 +6,13 @@ import me.dmillerw.flow.Point;
 import me.dmillerw.flow.WidgetSize;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.UUID;
 
 public abstract class Widget {
+
+    public static final ResourceLocation WIDGET_TEXTURE = new ResourceLocation("flowui", "textures/gui/widgets.png");
 
     public static abstract class BaseBuilder<B extends BaseBuilder, W extends Widget> {
 

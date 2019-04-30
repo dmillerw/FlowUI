@@ -11,6 +11,19 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
 public class RenderUtils {
 
+    public static void drawTexturedModalRect(int x, int y, int z, int startU, int startV, int endU, int endV, int width, int height) {
+        float f = 0.00390625F;
+        float f1 = 0.00390625F;
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+        bufferbuilder.pos((double) (x + 0), (double) (y + height), (double) z).tex((double) ((float) (startU) * 0.00390625F), (double) ((float) (endV) * 0.00390625F)).endVertex();
+        bufferbuilder.pos((double) (x + width), (double) (y + height), (double) z).tex((double) ((float) (endU) * 0.00390625F), (double) ((float) (endV) * 0.00390625F)).endVertex();
+        bufferbuilder.pos((double) (x + width), (double) (y + 0), (double) z).tex((double) ((float) (endU) * 0.00390625F), (double) ((float) (startV + 0) * 0.00390625F)).endVertex();
+        bufferbuilder.pos((double) (x + 0), (double) (y + 0), (double) z).tex((double) ((float) (startU) * 0.00390625F), (double) ((float) (startV + 0) * 0.00390625F)).endVertex();
+        tessellator.draw();
+    }
+
     public static void drawTooltip(int x, int y, String tooltip) {
         GuiScreen gui = Minecraft.getMinecraft().currentScreen;
         FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
